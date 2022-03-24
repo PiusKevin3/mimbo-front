@@ -1,5 +1,6 @@
 import {useState,useEffect} from 'react';
 import {Card,Form,FormGroup,Label,Input,Button} from 'reactstrap' 
+import axios from 'axios'
 
  export const  AdminForm = ()=> {
 
@@ -8,8 +9,12 @@ import {Card,Form,FormGroup,Label,Input,Button} from 'reactstrap'
 
     const onSubmit=(e)=>{
             e.preventDefault()
-            console.log(tagName)
-            console.log(tagTypeName)
+            const data = {typeName:tagTypeName,tagName:tagName}
+
+          axios.post('http://localhost:9000/api/tags/create',data)
+
+          setTagName('')
+            setTagTypeName('')
     }
 
   return (
@@ -29,7 +34,7 @@ import {Card,Form,FormGroup,Label,Input,Button} from 'reactstrap'
      <div className="select-container">
           <select value={tagTypeName} onChange={e=>setTagTypeName(e.target.value)} >
             {options.map((option) => (
-              <option value={option.value}>{option.label}</option>
+              <option key={option.label} value={option.value}>{option.label}</option>
             ))}
           </select>
         </div>
@@ -69,6 +74,10 @@ import {Card,Form,FormGroup,Label,Input,Button} from 'reactstrap'
 
 
 const options = [
+   {
+        label: "select Tag Type",
+        value: "select Tag Type",
+   },
   {
     label: "Hairstyle",
     value: "Hairstyle",
