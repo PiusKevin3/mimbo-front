@@ -1,8 +1,9 @@
-//import {useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import {Card,Form,FormGroup,Label,Input,Button,Row,Col} from 'reactstrap' 
 import AutoComplete from "./autoComplete"
 
  export const  UserForm = ()=> {
+    const [tagTypeName,setTagTypeName] = useState('')
 
   return (
     <div  >
@@ -15,15 +16,15 @@ import AutoComplete from "./autoComplete"
     <Label for="tagSelect">
       Select
     </Label>
-    <Input  id="tagSelect" name="tagSelect"  type="select" >
-      <option>
-      Hairstyle
-      </option>
-      <option>
-      Makeup
-      </option>
-    
-    </Input>
+
+     <div className="select-container">
+          <select value={tagTypeName} onChange={e=>setTagTypeName(e.target.value)} >
+            {options.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
+        </div>
+        
      </FormGroup>
 
       <br/>
@@ -36,3 +37,16 @@ import AutoComplete from "./autoComplete"
   );
 }
 
+
+const options = [
+    {
+      label: "Hairstyle",
+      value: "Hairstyle",
+    },
+    {
+      label: "Makeup",
+      value: "Makeup",
+    }
+    
+  ];
+  

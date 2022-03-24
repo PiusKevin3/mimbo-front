@@ -1,30 +1,39 @@
-//import {useState,useEffect} from 'react';
+import {useState,useEffect} from 'react';
 import {Card,Form,FormGroup,Label,Input,Button} from 'reactstrap' 
 
  export const  AdminForm = ()=> {
 
+    const [tagName,setTagName] = useState('')
+    const [tagTypeName,setTagTypeName] = useState('')
+
+    const onSubmit=(e)=>{
+            e.preventDefault()
+            console.log(tagName)
+            console.log(tagTypeName)
+    }
+
   return (
-    <div  >
+    <div>
 
-<h4 style={{paddingLeft:'100px'}} >  Enter Tag Details (Admin User)   </h4>
+    <h4 style={{paddingLeft:'100px'}} >  Enter Tag Details (Admin User)   </h4>
 
 
-<Card style={{left:'4%',right:'5%',padding:'20px'}} >
-       <Form inline>
+    <Card style={{left:'4%',right:'5%',padding:'20px'}} >
+       <Form onSubmit={onSubmit}  inline>
 
        <FormGroup>
     <Label for="tagSelect">
       Select
     </Label>
-    <Input  id="tagSelect" name="tagSelect"  type="select" >
-      <option>
-      Hairstyle
-      </option>
-      <option>
-      Makeup
-      </option>
+  
+     <div className="select-container">
+          <select value={tagTypeName} onChange={e=>setTagTypeName(e.target.value)} >
+            {options.map((option) => (
+              <option value={option.value}>{option.label}</option>
+            ))}
+          </select>
+        </div>
     
-    </Input>
      </FormGroup>
 
   <FormGroup>
@@ -35,18 +44,21 @@ import {Card,Form,FormGroup,Label,Input,Button} from 'reactstrap'
       Tag Name
     </Label>
     <Input
+      type="text"
       id="tagName"
       name="tagName"
       placeholder="Tag Name"
-      type="text"
+      value={tagName}
+      onChange={e=>setTagName(e.target.value)}
     />
   </FormGroup>
   
 
  
-  <Button>
+  <Button type='submit' >
     Submit
   </Button>
+
 </Form>
 </Card>
 
@@ -55,3 +67,15 @@ import {Card,Form,FormGroup,Label,Input,Button} from 'reactstrap'
   );
 }
 
+
+const options = [
+  {
+    label: "Hairstyle",
+    value: "Hairstyle",
+  },
+  {
+    label: "Makeup",
+    value: "Makeup",
+  }
+  
+];
