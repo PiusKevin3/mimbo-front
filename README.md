@@ -14,5 +14,5 @@
 ** You can access it through this link;
 https://github.com/PiusKevin3/mimbo-back
 
-## Happ Coding!
+## Happy Coding!
 
